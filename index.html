@@ -75,16 +75,16 @@
 
 
 
-<meta name="description" content="Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.">
+<meta name="description" content="Ever tried. Ever failed. No matter.  Try again. Fail again. Fail better.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Highgarden">
 <meta property="og:url" content="https://sssxm.github.io/index.html">
 <meta property="og:site_name" content="Highgarden">
-<meta property="og:description" content="Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.">
+<meta property="og:description" content="Ever tried. Ever failed. No matter.  Try again. Fail again. Fail better.">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Highgarden">
-<meta name="twitter:description" content="Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.">
+<meta name="twitter:description" content="Ever tried. Ever failed. No matter.  Try again. Fail again. Fail better.">
 
 
 
@@ -266,6 +266,260 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Simon Tyrell">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/titleIcon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Highgarden">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/23/HTTP报文内的信息以及状态码/" itemprop="url">HTTP报文内的信息以及状态码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T15:44:56-04:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HTTP-报文内的信息"><a href="#HTTP-报文内的信息" class="headerlink" title="HTTP 报文内的信息"></a>HTTP 报文内的信息</h3><p>HTTP 报文</p>
+<ul>
+<li>用于HTTP 协议交互的信息</li>
+<li>请求报文和响应报文</li>
+<li>由报文首部和报文主体组成，由CR+LF分割<ul>
+<li>报文首部<ol>
+<li>请求行 （请求报文） OR 状态行（响应报文）<ul>
+<li>请求行：请求的方法，URI和HTTP 版本</li>
+<li>状态行：响应状态码，原因短语和HTTP 版本</li>
+</ul>
+</li>
+<li>请求首部字段 （请求报文） OR 响应首部字段（响应报文）</li>
+<li>通用首部字段</li>
+<li>实体首部字段</li>
+<li>其他：Cookie 等</li>
+</ol>
+</li>
+<li>报文主体可有可无</li>
+</ul>
+</li>
+</ul>
+<h4 id="获取部分内容的范围请求"><a href="#获取部分内容的范围请求" class="headerlink" title="获取部分内容的范围请求"></a>获取部分内容的范围请求</h4><p>可以理解为一种可恢复机制</p>
+<ul>
+<li>需要实现对指定范围发送的请求：范围请求（Range Request）</li>
+</ul>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><ul>
+<li><p>首部字段 Range 来指定资源的byte 范围</p>
+</li>
+<li><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/tip.jpg</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.example.com</span><br><span class="line"><span class="attribute">Range</span>: bytes = 5001 - 10000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Range：bytes = 5001 - （5001 以后全部）</p>
+</li>
+<li><p>Range：bytes = -3000， 5000-7000 （从头到3000字节和5000到7000字节的多重范围）</p>
+</li>
+<li><p>响应会返回206 Partial Content 响应码，如果是多重范围，会在Content-Type注明 multiple/byteranges</p>
+</li>
+<li><p>如果服务器不支持范围请求，返回200 OK 以及完整的实体内容</p>
+</li>
+</ul>
+<h3 id="返回结果的HTTP状态码"><a href="#返回结果的HTTP状态码" class="headerlink" title="返回结果的HTTP状态码"></a>返回结果的HTTP状态码</h3><p><img src="/images/状态码.png" alt></p>
+<h4 id="2xx-成功"><a href="#2xx-成功" class="headerlink" title="2xx 成功"></a>2xx 成功</h4><ol>
+<li>200 OK<ul>
+<li>表示请求在服务器端正常处理了</li>
+</ul>
+</li>
+<li>204 No Content<ul>
+<li>请求正常处理，但是返回的响应报文中不含实体的主体部分</li>
+</ul>
+</li>
+<li>206 Partial Content<ul>
+<li>响应报文中包含由Content-Range指定返回的实体内容</li>
+</ul>
+</li>
+</ol>
+<h4 id="3xx-重定向"><a href="#3xx-重定向" class="headerlink" title="3xx  重定向"></a>3xx  重定向</h4><ol>
+<li>301 Moved Permanently<ul>
+<li>永久重定向，表示请求的资源已经被分配了新的URI</li>
+</ul>
+</li>
+<li>302 Found<ul>
+<li>临时重定向，表示请求的资源被临时分配了新的URI</li>
+</ul>
+</li>
+<li>303 See other<ul>
+<li>临时重定向，和302相似</li>
+<li>不同：303状态码明确表示客户端应该采用GET 方法获取资源</li>
+<li>301和302标准中，禁止将POST 方法换为GET 方法，虽然实际中都是这样做的</li>
+</ul>
+</li>
+<li>304 Not Modified<ul>
+<li>虽然是3xx， 但是和重定向没有关系</li>
+<li>表示当客户端发送附加条件的请求时，服务器允许访问，但是不满足附加条件</li>
+</ul>
+</li>
+<li>307 Temporary Redirect<ul>
+<li>临时重定向，和302相似</li>
+<li>遵守浏览器标准，不会从POST变为GET</li>
+</ul>
+</li>
+</ol>
+<h4 id="4xx-客户端错误"><a href="#4xx-客户端错误" class="headerlink" title="4xx 客户端错误"></a>4xx 客户端错误</h4><ol>
+<li>400 Bad Request<ul>
+<li>请求报文中有语法错误</li>
+</ul>
+</li>
+<li>401 Unauthorized<ul>
+<li>发送的请求需要通过HTTP 验证后才能访问</li>
+<li>第一次返回401：页面认证，在WWW-Authenticate首部用以Challenge 用户信息</li>
+<li>第二次返回401：认证失败</li>
+</ul>
+</li>
+<li>403 Forbidden<ul>
+<li>表明对请求资源的访问被服务器拒绝</li>
+</ul>
+</li>
+<li>404 Not Found<ul>
+<li>表明服务器上无法找到请求的资源</li>
+<li>或服务器拒绝请求并且不想说明理由</li>
+</ul>
+</li>
+</ol>
+<h4 id="5xx-服务器错误"><a href="#5xx-服务器错误" class="headerlink" title="5xx 服务器错误"></a>5xx 服务器错误</h4><ol>
+<li>500 Internal Server Error<ul>
+<li>服务器端在执行请求时发生错误</li>
+</ul>
+</li>
+<li>503 Service Unavailable<ul>
+<li>表明服务器暂时处于超负荷运行或者正在进行维护</li>
+<li>服务器可以在响应报文中写入RetryAfter首部字段说明服务恢复时间</li>
+</ul>
+</li>
+</ol>
+<p>From <a href="https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/">https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/</a> Thank you</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -592,7 +846,7 @@
               <img class="site-author-image" itemprop="image" src="/images/titleIcon.png" alt="Simon Tyrell">
             
               <p class="site-author-name" itemprop="name">Simon Tyrell</p>
-              <p class="site-description motion-element" itemprop="description">Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.</p>
+              <p class="site-description motion-element" itemprop="description">Ever tried. Ever failed. No matter. <br> Try again. Fail again. Fail better.</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -602,7 +856,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
