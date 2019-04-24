@@ -280,6 +280,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sssxm.github.io/2019/04/23/与HTTP协作的Web服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Simon Tyrell">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/titleIcon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Highgarden">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/23/与HTTP协作的Web服务器/" itemprop="url">与HTTP协作的Web服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T21:26:54-04:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="单主机多域名"><a href="#单主机多域名" class="headerlink" title="单主机多域名"></a>单主机多域名</h4><ul>
+<li>使用虚拟主机（虚拟服务器）</li>
+<li>域名通过DNS服务映射到IP地址（域名解析）之后访问网站</li>
+<li>问题：当两个域名解析到同一IP地址，服务器如何分辨请求的是哪个域名？<ul>
+<li>在发送HTTP请求时，必须在Host首部内完整指定主机名或者域名URI</li>
+</ul>
+</li>
+</ul>
+<h4 id="通信数据转发程序：代理，网关，隧道"><a href="#通信数据转发程序：代理，网关，隧道" class="headerlink" title="通信数据转发程序：代理，网关，隧道"></a>通信数据转发程序：代理，网关，隧道</h4><h5 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h5><ul>
+<li>接收客户端发送的请求转发给其他服务器，从源服务器得到响应后，传回给客户端</li>
+<li>不改变请求URI</li>
+<li>每次通过代理服务器转发，代理服务器会加入Via首部信息</li>
+<li>透明代理（Transparent Proxy）：不对报文做任何加工的代理类型</li>
+<li>缓存：<ul>
+<li>有效期<ul>
+<li>即使缓存存在，也需要因为客户端的要求和缓存的有效，向源服务器确认资源的有效性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pros<ul>
+<li>利用缓存技术，减少网络带宽和流量<ul>
+<li>预先将资源副本保存在代理服务器上</li>
+<li>当再次接收到对同样资源的请求时，直接将之前的缓存资源返回，避免向源服务器发出重复请求</li>
+</ul>
+</li>
+<li>组织内部针对特定网站的访问控制</li>
+<li>获取访问日志</li>
+</ul>
+</li>
+</ul>
+<h5 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h5><ul>
+<li>和代理相似</li>
+<li>能使通信线路上的服务器提供非HTTP协议服务</li>
+<li>使用网关提高通信的安全性</li>
+</ul>
+<h5 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h5><ul>
+<li><p>可以建立一条使用SSL等加密手段的通信线路</p>
+</li>
+<li><p>确保客户端和服务器进行安全的通信</p>
+</li>
+<li><p>不会解析HTTP 请求</p>
+</li>
+</ul>
+<strong>From</strong><br> <a href="https://sssxm.github.io/2019/04/23/与HTTP协作的Web服务器/">https://sssxm.github.io/2019/04/23/与HTTP协作的Web服务器/</a> <br><strong>Thank you!</strong>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -485,8 +670,7 @@
 </ul>
 </li>
 </ol>
-<p>From <a href="https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/">https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/</a> Thank you</p>
-
+<strong>From</strong><br> <a href="https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/">https://sssxm.github.io/2019/04/23/HTTP报文内的信息以及状态码/</a> <br><strong>Thank you!</strong>
           
         
       
@@ -772,8 +956,7 @@
 <li>Client 下次发送请求时，自动在请求报文中加入Cookie值</li>
 <li>Server通过对比Cookie，得到之前的状态信息</li>
 </ol>
-<p>From <a href="https://sssxm.github.io/2019/04/22/Web基础以及HTTP协议梗概/">https://sssxm.github.io/2019/04/22/Web基础以及HTTP协议梗概/</a> Thank you</p>
-
+<strong>From</strong><br> <a href="https://sssxm.github.io/2019/04/22/Web基础以及HTTP协议梗概/">https://sssxm.github.io/2019/04/22/Web基础以及HTTP协议梗概/</a> <br><strong>Thank you!</strong>
           
         
       
@@ -856,7 +1039,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
